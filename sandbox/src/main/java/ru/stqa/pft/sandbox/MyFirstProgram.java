@@ -6,10 +6,10 @@ public class MyFirstProgram {
         hello("user");
         hello("Evgeniya");
         double len = 4;
-        System.out.println("Ploshschad kvadrata so storonoi " + len + " = " + area(len));
+        System.out.println("Площадь квадрата со стороной " + len + " = " + area(len));
         double a = 5;
         double b= 20;
-        System.out.println("Ploshschad kvadrata so storonami " + a + " i " + b + " = " + area(a, b));
+        System.out.println("Площадь прямоугольника со сторонами " + a + " и " + b + " = " + area(a, b));
     }
         public static void hello(String somebody) {
             System.out.println("Hello, " + somebody + "!");
