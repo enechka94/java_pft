@@ -12,15 +12,14 @@ public class Point {
         this.y = y;
     }
 
-    public static double distance(Point p1, Point p2) {
-        return Math.sqrt((p2.y-p1.y) *  (p2.y-p1.y) + (p2.x - p1.x) * (p2.x - p1.x));
+    public double distance(Point p2) {
+        return Math.sqrt((p2.y-this.y) *  (p2.y-this.y) + (p2.x - this.x) * (p2.x - this.x));
 
     }
 
     public static void main(String[] args) {
-        Point p1 = new Point (1,1);
-        Point p2 = new Point (1, 4);
-        double distance = distance(p1, p2);
-        System.out.println("Расстояние между точками равно " + distance);
+        Point p1 = new Point (1,0);
+        Point p2 = new Point (1, 8);
+        System.out.println("Расстояние между точками равно " + p1.distance(p2));
     }
 }
