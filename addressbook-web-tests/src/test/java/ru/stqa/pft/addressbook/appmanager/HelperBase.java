@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class HelperBase {
     protected ChromeDriver wd;
@@ -30,7 +31,9 @@ public class HelperBase {
         }
     }
 
-    public void goToHomePage() {
-      wd.findElement(By.linkText("home page")).click();
+
+    public void select(By parameter, String text) {
+        new Select(wd.findElement(parameter)).selectByVisibleText(text);
     }
+
 }
