@@ -29,4 +29,8 @@ public class HelperBase {
             return false;
         }
     }
+
+    public void goToHomePage() {
+      wd.findElement(By.linkText("home page")).click();
+    }
 }
