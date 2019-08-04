@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,13 @@ public class ContactHelper extends HelperBase {
 
     }
 
+    public void delete(int index) {
+        selectContact(index);
+        deleteContact();
+        submitDeletion();
+        goToHomePage();
+    }
+
     public void submitDeletion() {
         wd.switchTo().alert().accept();
     }
@@ -71,7 +79,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void createContact(ContactData contactData, boolean creation) {
+    public void create(ContactData contactData, boolean creation) {
         addNewContact();
         fillContactForm(contactData, creation);
         CommitContactCreation();
@@ -81,8 +89,14 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
+    public void goToHomePage() {
+
+        if (isElementPresent(By.id("maintable"))) {return;}
+        click(By.linkText("home"));
+    }
+
+    public Contacts list() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements ) {
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
@@ -92,5 +106,12 @@ public class ContactHelper extends HelperBase {
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public void modify(ContactData contact, int index) {
+        editContact(index);
+        fillContactForm(contact, false);
+        submitContactModification();
+        goToHomePage();
     }
 }

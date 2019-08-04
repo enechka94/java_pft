@@ -5,6 +5,8 @@ import com.google.common.collect.ForwardingSet;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
 public class Contacts extends ForwardingSet<ContactData> {
 
     private Set<ContactData> delegate;
@@ -34,4 +36,5 @@ public class Contacts extends ForwardingSet<ContactData> {
         this.delegate = new HashSet<ContactData>();
 
     }
+
 }
