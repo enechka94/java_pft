@@ -8,6 +8,9 @@ import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.Comparator;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactModificationTests extends TestBase {
 
     @BeforeMethod
@@ -21,20 +24,17 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() {
         app.goTo().homePage();
-        ContactData contact = new ContactData().withFirstname("Anna").withLastname("Skvortsova").
-                withBday("19").withBmonth("02").withByear("1945").withEmail1("34@mail.ru");
-        Contacts before = app.contact().list();
+        ContactData contact = new ContactData().withFirstname("Svetlana").withLastname("Skvortsova").
+                withBday("19").withBmonth("June").withByear("1945");
+        Contacts before = app.contact().all();
+        ContactData modifiedContact = before.iterator().next();
         int index = before.size() - 1;
         app.contact().modify(contact, index);
-        Contacts after = app.contact().list();
+        Contacts after = app.contact().all();
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(index);
-        before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        //before.sort(byId);
-        //after.sort(byId);
-        Assert.assertEquals(before, after);
+        assertThat(after.size(), equalTo(before.size()));
+        assertThat(after, equalTo(before.withAdded(modifiedContact).without(contact)));
     }
 
 
