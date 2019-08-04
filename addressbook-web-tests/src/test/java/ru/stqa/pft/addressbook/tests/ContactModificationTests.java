@@ -14,14 +14,15 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
      app.goTo().homePage();
         if(app.contact().list().size() == 0)    {
-        app.contact().create(new ContactData("Anna", "John", "Skvortsova", "anna1", "lala", "12 gfgb 45", "+2562762", "+2564572", "+3457585", "anna@mail.ru", "anna1@gmail.com", "anna2@yandex.ru", "19", "October", "1995", "test5"), true);
+        app.contact().create(new ContactData().withFirstname("Anna"), true);
     }
 }
 
     @Test
     public void testContactModification() {
         app.goTo().homePage();
-        ContactData contact = new ContactData("Angelina", "John", "Skvortsova", "anna1", "lala", "12 gfgb 45", "+2562762", "+2564572", "+0007585", "anna@mail.ru", "anna1@gmail.com", "anna2@yandex.ru", "19", "November", "1985", null);
+        ContactData contact = new ContactData().withFirstname("Anna").withLastname("Skvortsova").
+                withBday("19").withBmonth("02").withByear("1945").withEmail1("34@mail.ru");
         Contacts before = app.contact().list();
         int index = before.size() - 1;
         app.contact().modify(contact, index);
