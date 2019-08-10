@@ -13,9 +13,31 @@ public class ContactData {
     private String homeNumber;
     private String mobileNumber;
     private String workNumber;
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    private String allPhones;
     private String email1;
     private String email2;
     private String email3;
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    private String allEmails;
     private String bday;
     private String bmonth;
     private String byear;
