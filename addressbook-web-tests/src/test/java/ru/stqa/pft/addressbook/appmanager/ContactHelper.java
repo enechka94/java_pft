@@ -131,7 +131,7 @@ public class ContactHelper extends HelperBase {
         goToHomePage();
     }
 
-    private Contacts contactCache = null;
+
 
     public ContactData infoFromEditedForm(ContactData contact) {
         initContactModificationById(contact.getId());
@@ -160,7 +160,7 @@ public class ContactHelper extends HelperBase {
     }
 
 
-
+    private Contacts contactCache = null;
 
     public Contacts all() {
         if (contactCache != null) {
@@ -178,10 +178,10 @@ public class ContactHelper extends HelperBase {
             String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
             String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).
+            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).
                     withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails));
         }
-        return new Contacts(contacts);
+        return new Contacts(contactCache);
     }
 
 }

@@ -17,7 +17,10 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
      app.goTo().homePage();
         if(app.contact().list().size() == 0)    {
-        app.contact().create(new ContactData().withFirstname("Anna"), true);
+        app.contact().create(new ContactData().withFirstname("Anna").withLastname("Skvortsova").withAddress("353 fdvgdfv sfsf")
+                .withHomeNumber("+353").withMobileNumber("131 4124").withWorkNumber("3453453453(22)")
+                .withEmail1("3434@fvfdd.dv").withEmail2("434@fdv.fdv").withEmail3("4@e.2")
+                .withBday("19").withBmonth("July").withByear("1945").withGroup("test1"), true);
     }
 }
 
