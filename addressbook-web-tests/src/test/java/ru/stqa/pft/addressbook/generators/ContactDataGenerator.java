@@ -53,19 +53,19 @@ public class ContactDataGenerator {
         XStream xStream = new XStream();
         xStream.processAnnotations(ContactData.class);
         String xml = xStream.toXML(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try(Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
 
     private static void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for (ContactData contact : contacts) {
-            writer.write(String.format("%s;%s;%s\n", contact.getFirstname(), contact.getMiddlename(), contact.getLastname(),
-                    contact.getAddress(), contact.getHomeNumber(), contact.getMobileNumber(), contact.getWorkNumber(),
-                    contact.getBday(), contact.getBmonth(), contact.getByear(), contact.getGroup()));
+        try(Writer writer = new FileWriter(file)) {
+            for (ContactData contact : contacts) {
+                writer.write(String.format("%s;%s;%s\n", contact.getFirstname(), contact.getMiddlename(), contact.getLastname(),
+                        contact.getAddress(), contact.getHomeNumber(), contact.getMobileNumber(), contact.getWorkNumber(),
+                        contact.getBday(), contact.getBmonth(), contact.getByear(), contact.getGroup()));
+            }
         }
-        writer.close();
 
 
     }
