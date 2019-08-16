@@ -25,43 +25,4 @@
     <byear>1991</byear>
     <group>test1</group>
   </ru.stqa.pft.addressbook.model.ContactData>
-  <ru.stqa.pft.addressbook.model.ContactData>
-    <firstname>First name 2</firstname>
-    <middlename>Middle name 2</middlename>
-    <lastname>Last name 2</lastname>
-    <address>address 2</address>
-    <homeNumber>+2344342</homeNumber>
-    <mobileNumber>+2 3 2</mobileNumber>
-    <workNumber>22 22 2</workNumber>
-    <bday>12</bday>
-    <bmonth>June</bmonth>
-    <byear>1992</byear>
-    <group>test1</group>
-  </ru.stqa.pft.addressbook.model.ContactData>
-  <ru.stqa.pft.addressbook.model.ContactData>
-    <firstname>First name 3</firstname>
-    <middlename>Middle name 3</middlename>
-    <lastname>Last name 3</lastname>
-    <address>address 3</address>
-    <homeNumber>+2344343</homeNumber>
-    <mobileNumber>+2 3 3</mobileNumber>
-    <workNumber>22 22 3</workNumber>
-    <bday>13</bday>
-    <bmonth>June</bmonth>
-    <byear>1993</byear>
-    <group>test1</group>
-  </ru.stqa.pft.addressbook.model.ContactData>
-  <ru.stqa.pft.addressbook.model.ContactData>
-    <firstname>First name 4</firstname>
-    <middlename>Middle name 4</middlename>
-    <lastname>Last name 4</lastname>
-    <address>address 4</address>
-    <homeNumber>+2344344</homeNumber>
-    <mobileNumber>+2 3 4</mobileNumber>
-    <workNumber>22 22 4</workNumber>
-    <bday>14</bday>
-    <bmonth>June</bmonth>
-    <byear>1994</byear>
-    <group>test1</group>
-  </ru.stqa.pft.addressbook.model.ContactData>
 </list>
