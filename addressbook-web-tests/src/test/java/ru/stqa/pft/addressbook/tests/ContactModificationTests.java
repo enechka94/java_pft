@@ -31,8 +31,11 @@ public class ContactModificationTests extends TestBase {
         Contacts before = app.db().contacts();
         File photo = new File("src/test/resources/1556232387135-31.jpg");
         ContactData modifiedContact = before.iterator().next();
-        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Inga").withLastname("Skvortsova").
-                withPhoto(photo).withBday("19").withBmonth("June").withByear("1945");
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Inga").withLastname("Skvortsova")
+                .withPhoto(photo).withBday("19").withAddress("353 fdvgdfv sfsf")
+                .withHomeNumber("+353").withMobileNumber("131 4124").withWorkNumber("3453453453(22)")
+                .withEmail1("3434@fvfdd.dv").withEmail2("434@fdv.fdv").withEmail3("4@e.2")
+                .withBday("19").withBmonth("June").withByear("1945");
         app.contact().modify(contact);
         Contacts after = app.db().contacts();
         assertThat(after.size(), equalTo(before.size()));
