@@ -5,6 +5,7 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -63,7 +64,7 @@ public class ContactDataGenerator {
             for (ContactData contact : contacts) {
                 writer.write(String.format("%s;%s;%s\n", contact.getFirstname(), contact.getMiddlename(), contact.getLastname(),
                         contact.getAddress(), contact.getHomeNumber(), contact.getMobileNumber(), contact.getWorkNumber(),
-                        contact.getBday(), contact.getBmonth(), contact.getByear(), contact.getGroup()));
+                        contact.getBday(), contact.getBmonth(), contact.getByear(), contact.getGroups()));
             }
         }
 
@@ -78,7 +79,7 @@ public class ContactDataGenerator {
                     .withLastname(String.format("Last name %s", i)).withAddress((String.format("address %s", i)))
             .withHomeNumber(String.format("+234434%s", i)).withMobileNumber(String.format("+2 3 %s", i))
             .withWorkNumber(String.format("22 22 %s", i)).withBday(String.format("1%s", i)).withBmonth("June")
-            .withByear(String.format("199%s", i)).withGroup("test1"));
+            .withByear(String.format("199%s", i)));
         }
         return contacts;
     }
