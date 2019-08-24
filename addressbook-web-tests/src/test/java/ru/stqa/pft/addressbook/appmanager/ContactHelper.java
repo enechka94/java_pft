@@ -8,6 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -200,5 +201,18 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public void deleteFromGroup(ContactData contactToDelete, GroupData fromGroup) {
+        selectGroupToDeleteFrom(fromGroup);
+        selectContactById(contactToDelete.getId());
+        DeleteContactFromGroup();
+        contactCache = null;
+    }
 
+    private void selectGroupToDeleteFrom(GroupData group) {
+        new Select(wd.findElement(By.name("group"))).selectByVisibleText(group.getName());
+    }
+
+    private void DeleteContactFromGroup() {
+        wd.findElement(By.name("remove")).click();
+    }
 }
