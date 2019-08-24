@@ -3,6 +3,7 @@
     <firstname>First name 0</firstname>
     <middlename>Middle name 0</middlename>
     <lastname>Last name 0</lastname>
+    <photo>src/test/resources/1556232387135-31.jpg</photo>
     <address>address 0</address>
     <homeNumber>+2344340</homeNumber>
     <mobileNumber>+2 3 0</mobileNumber>
@@ -16,6 +17,7 @@
     <firstname>First name 1</firstname>
     <middlename>Middle name 1</middlename>
     <lastname>Last name 1</lastname>
+    <photo>src/test/resources/1556232387135-31.jpg</photo>
     <address>address 1</address>
     <homeNumber>+2344341</homeNumber>
     <mobileNumber>+2 3 1</mobileNumber>
