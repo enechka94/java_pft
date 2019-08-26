@@ -66,10 +66,10 @@ public class UsersData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UsersData userData = (UsersData) o;
-        return id == userData.id &&
-                Objects.equals(username, userData.username) &&
-                Objects.equals(email, userData.email);
+        UsersData usersData = (UsersData) o;
+        return id == usersData.id &&
+                Objects.equals(username, usersData.username) &&
+                Objects.equals(email, usersData.email);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class UsersData {
 
     @Override
     public String toString() {
-        return "UserData{" +
+        return "UsersData{" +
                 "id=" + id +
                 ", inAsUser='" + username + '\'' +
                 ", email='" + email + '\'' +

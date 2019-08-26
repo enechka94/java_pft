@@ -15,7 +15,6 @@ public class ChangePasswordTests extends TestBase {
     @Test
     public void testChangePassword() throws Exception {
 
-        String password = "newPassword";
         String adminLogin = "administrator";
         String adminPassword = "root";
         app.registration().login(adminLogin, adminPassword);
@@ -23,9 +22,10 @@ public class ChangePasswordTests extends TestBase {
 
         Users users = app.db().users();
         UsersData user = users.iterator().next();
-
+        String password = "password";
 
         app.james().doesUserExist(user.getUsername());
+        app.james().drainEmail(user.getUsername(), password);
         app.user().initModificationById(user.getId());
         app.user().resetPassword();
         app.registration().logout();

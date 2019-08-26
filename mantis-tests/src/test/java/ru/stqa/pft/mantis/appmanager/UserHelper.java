@@ -13,7 +13,7 @@ public class UserHelper extends HelperBase {
     }
 
     public void resetPassword() {
-        click(By.cssSelector("input[value='Reset Password']"));
+        click(By.cssSelector("input[value='Сбросить пароль']"));
 
     }
 

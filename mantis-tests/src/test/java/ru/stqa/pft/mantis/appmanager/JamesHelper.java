@@ -33,9 +33,9 @@ import java.util.stream.Collectors;
             return result.trim().equals("User " + name + " exist");
         }
 
-        public void createUser(String name, String passwd) {
+        public void createUser(String name, String password) {
             initTelnetSession();
-            write("adduser " + name + " " + passwd);
+            write("adduser " + name + " " + password);
             String result = readUntil("User " + name + " added");
             closeTelnetSession();
         }
@@ -118,6 +118,7 @@ import java.util.stream.Collectors;
 
 
         public void drainEmail(String username, String password) throws MessagingException {
+            initTelnetSession();
             Folder inbox = openInbox(username, password);
             for (Message message : inbox.getMessages()) {
                 message.setFlag(Flags.Flag.DELETED, true);
@@ -131,6 +132,7 @@ import java.util.stream.Collectors;
         }
 
         private Folder openInbox(String username, String password) throws MessagingException {
+            initTelnetSession();
             store = mailSession.getStore("pop3");
             store.connect(mailserver, username, password);
             Folder folder = store.getDefaultFolder().getFolder("INBOX");
