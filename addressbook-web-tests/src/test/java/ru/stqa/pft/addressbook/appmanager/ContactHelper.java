@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
+import static ru.stqa.pft.addressbook.tests.TestBase.app;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class ContactHelper extends HelperBase {
 
     public void selectContactById(int id) {
 
-        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+        wd.findElement(By.xpath("//input[@id='" + id + "']")).click();
     }
 
     public void deleteContact() {
@@ -84,7 +85,9 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void editContact(int index) { wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click(); }
+    public void editContact(int index) {
+        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+    }
 
     public void editContactById(int id) {
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
@@ -108,14 +111,16 @@ public class ContactHelper extends HelperBase {
 
     public void goToHomePage() {
 
-        if (isElementPresent(By.id("maintable"))) {return;}
+        if (isElementPresent(By.id("maintable"))) {
+            return;
+        }
         click(By.linkText("home"));
     }
 
     public Contacts list() {
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
-        for (WebElement element : elements ) {
+        for (WebElement element : elements) {
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
@@ -123,7 +128,6 @@ public class ContactHelper extends HelperBase {
         }
         return contacts;
     }
-
 
 
     public void modify(ContactData contact) {
@@ -135,7 +139,6 @@ public class ContactHelper extends HelperBase {
         contactCache = null;
         goToHomePage();
     }
-
 
 
     public ContactData infoFromEditedForm(ContactData contact) {
@@ -157,10 +160,10 @@ public class ContactHelper extends HelperBase {
     }
 
     private void initContactModificationById(int id) {
-       // WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
-       // WebElement row = checkbox.findElement(By.xpath("./../.."));
-       // List<WebElement> cells = row.findElements(By.tagName("id"));
-       // cells.get(7).findElement(By.tagName("a")).click();
+        // WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        // WebElement row = checkbox.findElement(By.xpath("./../.."));
+        // List<WebElement> cells = row.findElements(By.tagName("id"));
+        // cells.get(7).findElement(By.tagName("a")).click();
         wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     }
 
@@ -176,7 +179,7 @@ public class ContactHelper extends HelperBase {
 
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
-        for (WebElement element : elements ) {
+        for (WebElement element : elements) {
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String address = element.findElement(By.xpath(".//td[4]")).getText();
@@ -189,19 +192,23 @@ public class ContactHelper extends HelperBase {
         return new Contacts(contactCache);
     }
 
-    public void addToGroup(ContactData contact, GroupData addedGroup) {
+    public void addToGroup(ContactData contact, GroupData group){
         selectContactById(contact.getId());
-        selectGroupToAddContact(addedGroup);
-        wd.findElement(By.name("add")).click();;
+        selectGroupToAddContact(group);
+        addToSelectedCroups();
     }
 
+    private void addToSelectedCroups() {
+        click(By.cssSelector("input[value='Add to']"));
+    }
 
-    private void selectGroupToAddContact( GroupData group) {
+    public void selectGroupToAddContact(GroupData group) {
         new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(group.getName());
     }
 
 
-    public void deleteFromGroup(ContactData contactToDelete, GroupData fromGroup) {
+
+   /* public void deleteFromGroup(ContactData contactToDelete, GroupData fromGroup) {
         selectGroupToDeleteFrom(fromGroup);
         selectContactById(contactToDelete.getId());
         DeleteContactFromGroup();
@@ -214,5 +221,6 @@ public class ContactHelper extends HelperBase {
 
     private void DeleteContactFromGroup() {
         wd.findElement(By.name("remove")).click();
-    }
-}
+    }*/
+
+        }

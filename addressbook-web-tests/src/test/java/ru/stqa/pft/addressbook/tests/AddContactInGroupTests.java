@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
+import java.util.Objects;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -34,15 +35,24 @@ public class AddContactInGroupTests extends TestBase {
 
     @Test
     public void testContactAddToGroup() {
-        Contacts contacts = app.db().contacts();
-        ContactData contactToAdd = contacts.iterator().next();
+        Contacts before = app.db().contacts();
+        ContactData contactToAdd = before.iterator().next();
+        int idContactToAdd = contactToAdd.getId();
+        Groups contactGroupsBefore = contactToAdd.getGroups();
         Groups groups = app.db().groups();
-        GroupData groupToAdd = groups.iterator().next();
-        Groups contactInGroupsBefore = contactToAdd.getGroups();
+        GroupData groupToAdd = groups.stream().iterator().next();
         app.goTo().homePage();
         app.contact().addToGroup(contactToAdd, groupToAdd);
-        Groups contactInGroupsAfter = contactToAdd.getGroups();
-        assertThat(contactInGroupsAfter, equalTo(contactInGroupsBefore));
+        app.db().contacts();
+        app.goTo().homePage();
+        Groups groupsAfter = app.db().groups();
+        GroupData group = groups.stream().iterator().next();
+        Contacts after = app.db().contacts();
+        ContactData contactAfter = after.stream()
+                .filter(data -> Objects.equals(data.getId(), idContactToAdd)).findFirst().get();
+        Groups contactGroupsAfter = contactAfter.getGroups();
+        assertThat(contactGroupsAfter, equalTo(contactGroupsBefore.withAdded(group)));
+        verifyContactListInUI();
 
-    }
-}
+                }
+            }
