@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
+import java.util.Objects;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,23 +34,24 @@ public class DeleteContactFromGroupTest extends TestBase {
 
     @Test
     public void testDeleteContactFromGroup() {
-        Contacts contacts = app.db().contacts();
-        ContactData contactToDelete = contacts.iterator().next();
-        Groups contactGroupsBefore = contactToDelete.getGroups();
-
-        if (contactGroupsBefore.size() == 0) {
-            Groups groups = app.db().groups();
-            GroupData groupToAdd = groups.iterator().next();
-        //    app.contact().addToGroup(contactToDelete, groupToAdd);
-        }
-        Groups contactInGroupsBefore = contactToDelete.getGroups();
-
-        Groups fromGroup = contactToDelete.getGroups();
-        GroupData group = fromGroup.iterator().next();
         app.goTo().homePage();
-        //app.contact().deleteFromGroup(contactToDelete, group);
-        //Groups contactInGroupsAfter = contactToDelete.getGroups();
-       // assertThat(contactInGroupsAfter, equalTo(contactInGroupsBefore));
+        Contacts contacts = app.db().contacts();
+        for (ContactData contact : contacts) {
+            if (contact.getGroups().size() != 0) {
+                Groups groupsBefore = contact.getGroups();
+                app.contact().deleteFromGroup(contact);
+                Contacts updatedContacts = app.db().contacts();
+                for (ContactData updatedContact : updatedContacts) {
+                    if (updatedContact.getId() == contact.getId()) {
+                        Groups groupsAfter = updatedContact.getGroups();
+                        assertThat(groupsAfter.size(), equalTo(groupsBefore.size() - 1));
+                        groupsBefore.removeAll(groupsAfter);
+                        assertThat(groupsAfter, equalTo(contact.getGroups().without(groupsBefore.iterator().next())));
+                    }
+                }
+            }
+            break;
+        }
 
     }
 }
