@@ -30,6 +30,17 @@ public class DeleteContactFromGroupTest extends TestBase {
         if (app.db().groups().size() == 0) {
             app.group().create(new GroupData().withName("test1"));
         }
+        Contacts contacts = app.db().contacts();
+        for (ContactData contact : contacts) {
+            if (contact.getGroups().size() == 0) {
+                Contacts before = app.db().contacts();
+                ContactData contactToAdd = before.iterator().next();
+                Groups groups = app.db().groups();
+                GroupData groupToAdd = groups.stream().iterator().next();
+                app.goTo().homePage();
+                app.contact().addToGroup(contactToAdd, groupToAdd);
+            }
+        }
     }
 
     @Test
@@ -37,7 +48,8 @@ public class DeleteContactFromGroupTest extends TestBase {
         app.goTo().homePage();
         Contacts contacts = app.db().contacts();
         for (ContactData contact : contacts) {
-            if (contact.getGroups().size() = 0) {
+
+           /* if (contact.getGroups().size() == 0) {
 	            Contacts before = app.db().contacts();
                 ContactData contactToAdd = before.iterator().next();
                 int idContactToAdd = contactToAdd.getId();
@@ -46,7 +58,7 @@ public class DeleteContactFromGroupTest extends TestBase {
                 GroupData groupToAdd = groups.stream().iterator().next();
                 app.goTo().homePage();
                 app.contact().addToGroup(contactToAdd, groupToAdd);
-            }
+            }*/
             if (contact.getGroups().size() != 0) {
                 Groups groupsBefore = contact.getGroups();
                 app.contact().deleteFromGroup(contact);

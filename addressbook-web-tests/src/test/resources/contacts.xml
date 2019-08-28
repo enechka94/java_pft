@@ -11,7 +11,7 @@
     <bday>10</bday>
     <bmonth>June</bmonth>
     <byear>1990</byear>
-    <group>test1</group>
+    <groups>test1</groups>
   </ru.stqa.pft.addressbook.model.ContactData>
   <ru.stqa.pft.addressbook.model.ContactData>
     <firstname>First name 1</firstname>
@@ -25,6 +25,6 @@
     <bday>11</bday>
     <bmonth>June</bmonth>
     <byear>1991</byear>
-    <group>test1</group>
+    <groups>test1</groups>
   </ru.stqa.pft.addressbook.model.ContactData>
 </list>
