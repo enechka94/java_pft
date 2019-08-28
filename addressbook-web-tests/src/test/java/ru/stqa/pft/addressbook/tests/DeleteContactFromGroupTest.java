@@ -37,6 +37,16 @@ public class DeleteContactFromGroupTest extends TestBase {
         app.goTo().homePage();
         Contacts contacts = app.db().contacts();
         for (ContactData contact : contacts) {
+            if (contact.getGroups().size() = 0) {
+	            Contacts before = app.db().contacts();
+                ContactData contactToAdd = before.iterator().next();
+                int idContactToAdd = contactToAdd.getId();
+                Groups contactGroupsBefore = contactToAdd.getGroups();
+                Groups groups = app.db().groups();
+                GroupData groupToAdd = groups.stream().iterator().next();
+                app.goTo().homePage();
+                app.contact().addToGroup(contactToAdd, groupToAdd);
+            }
             if (contact.getGroups().size() != 0) {
                 Groups groupsBefore = contact.getGroups();
                 app.contact().deleteFromGroup(contact);
